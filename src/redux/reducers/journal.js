@@ -35,7 +35,7 @@ const reducer = (state = initialState, action) => {
 
         case GET_JOURNAL:
             return Object.assign({}, state, {
-                journal: state.journals.find(x => x.id === +action.id)
+                journal: state.journals.find(x => String(x.id) === String(action.id))
             })
         case UPDATE_JOURNAL:
         case DELETE_JOURNAL:
