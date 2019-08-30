@@ -9,7 +9,7 @@ import TextInput from '../../components/TextInput'
 import Button from '../../components/Button'
 import Alert from '../../components/Alert'
 
-import { addJournal } from '../../redux/actions/journal'
+import { addJournal, getAllJournals } from '../../redux/actions/journal'
 
 class Home extends React.Component {
 
@@ -18,6 +18,14 @@ class Home extends React.Component {
     content: '',
     error: '',
     success: ''
+  }
+
+  componentDidMount () {
+    const { journals, getAllJournals } = this.props
+    if(!journals.length){
+      getAllJournals()
+    }
+
   }
 
   titleChangeHandler = (e) => this.setState({title: e.target.value})
@@ -40,13 +48,13 @@ class Home extends React.Component {
   render() {
     const { journals } = this.props
     const { error, success } = this.state
+    console.log(journals)
 
-    const data = journals.sort(
+    const data = (journals || []).sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )
     .slice(0, 5)
-
     return (
       <Container>
         <Header title="Daily Journals" />
@@ -86,11 +94,12 @@ class Home extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
+  getAllJournals: () => dispatch(getAllJournals()),
   addJournal: journal => dispatch(addJournal(journal))
 })
 
-const mapStateToProps = state => ({
-  journals: state.journalReducer.journals
+const mapStateToProps = ({journalReducer: {journals, getAllJournalsLoading, getAllJournalsError}}) => ({
+  journals, getAllJournalsLoading, getAllJournalsError
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

@@ -1,27 +1,16 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
+import journalSaga from './saga/journal'
 import rootReducer from './reducers'
 
-const initialState = {
-    journalReducer: {
-        journals: [
-            {
-              title: 'My first journal',
-              content: 'This is my first journal',
-              createdAt: '2019-08-26T01:24:08.440Z',
-              updatedAt: '2019-08-26T01:24:08.440Z',
-              isDeleted: false,
-              id: 1,
-            },
-            {
-              title: 'My second journal',
-              content: 'This is my second journal',
-              createdAt: '2019-08-27T01:25:34.072Z',
-              updatedAt: '2019-08-27T01:25:34.072Z',
-              isDeleted: false,
-              id: 2,
-            },
-          ]
-    }
-}
+const sagaMiddleware = createSagaMiddleware()
 
-export default createStore(rootReducer, initialState)
+const store = createStore(
+  rootReducer,
+  applyMiddleware(sagaMiddleware)
+)
+
+sagaMiddleware.run(journalSaga)
+
+export default store
