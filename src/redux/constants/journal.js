@@ -1,0 +1,5 @@
+export const ADD_JOURNAL = 'ADD_JOURNAL'
+export const UPDATE_JOURNAL = 'UPDATE_JOURNAL'
+export const GET_JOURNAL = 'GET_JOURNAL'
+export const GET_ALL_JOURNALS = 'GET_ALL_JOURNALS'
+export const DELETE_JOURNAL = 'DELETE_JOURNAL'
