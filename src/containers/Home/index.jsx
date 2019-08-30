@@ -28,7 +28,6 @@ class Home extends React.Component {
     const { addJournal } = this.props
     const { title, content } = this.state
     if (title && content) {
-      this.state.createdAt = new Date()
       addJournal(this.state)
       this.setState({success: 'Journal added successfully.'})
       this.resetSuccessErrorSoon()

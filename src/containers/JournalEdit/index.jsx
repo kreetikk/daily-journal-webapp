@@ -21,7 +21,7 @@ class JournalEdit extends React.Component {
   deleteHandler = (e) => {
     const { history } = this.props
     if (window.confirm('Are you sure you want to delete this journal?')) {
-      history.push('/journals')
+      history.replace('/journals')
     }
     e.preventDefault()
   }

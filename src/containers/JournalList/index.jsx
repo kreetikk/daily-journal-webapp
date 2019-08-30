@@ -11,7 +11,7 @@ import { addJournal } from '../../redux/actions/journal'
 
 class JournalList extends React.Component {
   render () {
-    const { journals, history } = this.props
+    const { journals } = this.props
     const data = journals.sort(
       (a, b) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -20,7 +20,7 @@ class JournalList extends React.Component {
     return (
       <Container>
         <Header title='Daily Journals' />
-        <Button onClick={() => history.goBack()}>← Back</Button>
+        <Button to="/">← Back</Button>
 
         <br />
 
